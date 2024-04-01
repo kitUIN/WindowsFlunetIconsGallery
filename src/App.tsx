@@ -18,16 +18,25 @@ function App() {
       });
   }, []);
   return (
-    <>
+    <div className="App">
       <h1>Vite + React</h1>
-      <div className="card">
-        {data.map((item) => (
-          <div className="ficon">
-            <img src={item.path} alt={item.name} />
-          </div>
-        ))}
+      <div className="card-box">
+        <div className="card">
+          {data.map((item) => (
+            <div style={{ padding: "40px" }}>
+              <img
+                src={item.path}
+                alt={item.name}
+                style={{
+                  height: "128px",
+                  width: "128px",
+                }}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 
