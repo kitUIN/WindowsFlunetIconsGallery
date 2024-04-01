@@ -1,11 +1,24 @@
-import { useState } from 'react'
+import { JSXElementConstructor, ReactElement, ReactNode, useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [count, setCount] = useState({})
+  useEffect(() => {
+      fetch('/icons/iconlist.json', {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+          },
+      
+      })
+      .then(response => response.json())//解析为Promise
+      .then(data => {
+        console.log(data);
+        setCount(data);
+    })
+  })
   return (
     <>
       <div>
@@ -18,12 +31,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
