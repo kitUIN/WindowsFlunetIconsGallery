@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Icon } from "../rollup-plugin/rollup-plugin-pregit";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+
 function App() {
   const [data, setData] = useState(new Array<Icon>());
   useEffect(() => {
