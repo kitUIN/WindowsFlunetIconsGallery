@@ -3,13 +3,15 @@ import { spawn } from "cross-spawn";
 import fs from "fs";
 import path from "path";
 import {promisify} from 'util';
-import { TSMap } from "typescript-map"
 interface Options {
   giturl?: string;
   staticDir: string;
 }
-
-const iconList = new TSMap();
+export type Icon = {
+  name: string;
+  path: string;
+}
+const iconList = new Array<Icon>();
 
 function geticons(giturl: string, path: string) {
   return new Promise<string>((resolve, reject) => {
@@ -32,7 +34,7 @@ function geticonslist(uri: string) {
       if (stats.isDirectory()) {
         geticonslist(fPath);
       } else {
-        iconList.set(path.basename(fPath),fPath.replace("dist", ""));
+        iconList.push({name:path.basename(fPath),path:fPath.replace("dist", "")});
       }
     }
   });
@@ -61,7 +63,7 @@ function preGitPlugin(
             // console.info("[git] 删除README文件成功");
             geticonslist(options.staticDir);
             // console.info(iconList);
-            writeFileAsync(path.join(options.staticDir, `iconlist.json`), JSON.stringify(iconList.toJSON()));
+            writeFileAsync(path.join(options.staticDir, `iconlist.json`), JSON.stringify(iconList));
           });
         }
       } catch (e) {

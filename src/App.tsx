@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
+import {Icon} from '../rollup-plugin/rollup-plugin-pregit'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 function App() {
-  const [count, setCount] = useState({})
+  const [data, setData] = useState(new Array<Icon>());
   useEffect(() => {
       fetch('/icons/iconlist.json', {
         method: "GET",
@@ -13,13 +14,12 @@ function App() {
           },
       
       })
-      .then(response => response.json())//解析为Promise
+      .then(response => response.json()) 
       .then(data => {
         console.log(data);
-        setCount(data);
-        console.log(count);
+        setData(data);
     })
-  })
+  }, [])
   return (
     <>
       <div>
@@ -32,7 +32,11 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-
+        {data.map(item => (
+          <div  >
+            <img src={item.path} alt={item.name} />
+            </div>
+        ))}
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
