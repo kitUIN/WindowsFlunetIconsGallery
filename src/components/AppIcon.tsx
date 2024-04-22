@@ -18,7 +18,7 @@ function AppIcon(iconItem: AppIconProps) {
         src={iconItem.item.path}
         alt={iconItem.item.name}
       />
-      <p className="app-icon-name">{iconItem.item.name}</p>
+      {/* <p className="app-icon-name">{iconItem.item.name}</p> */}
       {iconItem.item.more && (
         <Tooltip content={t("moreIcon")} relationship="label">
           <MoreCircleRegular className="app-icon-more" />
