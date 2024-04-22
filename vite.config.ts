@@ -10,8 +10,8 @@ export default defineConfig({
   plugins: [
     react({ babel: { plugins: [jotaiDebugLabel, jotaiReactRefresh] } }),
     preGitPlugin({
-      staticDir: 'dist/icons',
-      giturl:"https://github.com/MicaUI/WindowsIconCustomization"
+      staticDir: 'icons',
+      giturl:"https://github.com/kitUIN/WindowsIconCustomization"
     }),
   ],
   server: {

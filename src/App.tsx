@@ -1,8 +1,23 @@
-import { useEffect, useState } from "react";
-import { Icon } from "../rollup-plugin/rollup-plugin-pregit";
+import { useEffect } from "react";
+import { pages as clientPages } from "./pages";
+import { getTheme, themeAtom, totalDataState } from "@/atoms/local";
+import { FluentProvider, makeStyles } from "@fluentui/react-components";
+import { useAtomValue } from "jotai/react";
+import { Tabs } from "./components/Tabs";
+import { useSetRecoilState } from "recoil";
+import { Route, Routes } from "react-router-dom";
+import { LazyImportComponent } from "./components/LazyImportComponent";
+const useStyles = makeStyles({
+  provider: {
+    width: "100%",
+    height: "100%",
+  },
+});
 
 function App() {
-  const [data, setData] = useState(new Array<Icon>());
+  const styles = useStyles();
+  const theme = useAtomValue(themeAtom);
+  const setAllData = useSetRecoilState(totalDataState);
   useEffect(() => {
     fetch("/icons/iconlist.json", {
       method: "GET",
@@ -13,31 +28,29 @@ function App() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        setData(data);
+        setAllData(data);
       });
-  }, []);
+  }, [setAllData]);
   return (
     <div className="App">
-      <h1>Vite + React</h1>
-      <div className="card-box">
-        <div className="card">
-          {data.map((item) => (
-            <div style={{ padding: "40px" }}>
-              <img
-                src={item.path}
-                alt={item.name}
-                style={{
-                  height: "128px",
-                  width: "128px",
-                }}
-              />
-            </div>
-          ))}
+      <FluentProvider className={styles.provider} theme={getTheme(theme)}>
+        <div className="Nav">
+          <Tabs />
+          {/* <Divider vertical style={{ height: "100%" }} /> */}
+          <div className="Routes">
+            <Routes>
+              {clientPages.map(({ path, element }, index) => (
+                <Route
+                  key={`${path}-${index}`}
+                  path={path}
+                  element={<LazyImportComponent lazyChildren={element} />}
+                />
+              ))}
+            </Routes>
+          </div>
         </div>
-      </div>
+      </FluentProvider>
     </div>
   );
 }
-
 export default App;
