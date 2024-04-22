@@ -23,7 +23,7 @@ export const Tabs: FC = () => {
         vertical
       >
         {pages
-          .filter((page) => !page.top)
+          .filter((page) => page.top)
           .map(({ label, path, icon }, index) => (
             <Tab
               icon={createElement(icon)}
@@ -41,7 +41,7 @@ export const Tabs: FC = () => {
         vertical
       >
         {pages
-          .filter((page) => page.top)
+          .filter((page) => !page.top)
           .map(({ label, path, icon }, index) => (
             <Tab
               icon={createElement(icon)}
