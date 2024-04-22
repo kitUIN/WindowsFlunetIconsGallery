@@ -1,3 +1,6 @@
 {
-    "moreIcon":"Contains Multiple Image Resources"
+    "moreIcon":"Contains Multiple Image Resources",
+    "home":"Home",
+    "about":"About",
+    "settings":"Settings"
 }

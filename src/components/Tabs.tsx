@@ -5,6 +5,7 @@ import {
 } from "@fluentui/react-components";
 import { pages } from "@/pages";
 import { useLocation, useNavigate } from "react-router-dom"; 
+import { useTranslation } from "react-i18next";
 
 export const Tabs: FC = () => {
   const location = useLocation();
@@ -13,7 +14,7 @@ export const Tabs: FC = () => {
     typeof selectedPath === "string"
       ? navigate({ pathname: selectedPath })
       : null;
-
+      const { t } = useTranslation();
   return (
     <div className="Tabs">
       <TabList
@@ -30,7 +31,7 @@ export const Tabs: FC = () => {
               key={`${path}-${index}`}
               value={path}
             >
-              {label}
+              {t(label)}
             </Tab>
           ))}
       </TabList>
@@ -48,7 +49,7 @@ export const Tabs: FC = () => {
               key={`${path}-${index}`}
               value={path}
             >
-              {label}
+            {t(label)}
             </Tab>
           ))}
       </TabList>

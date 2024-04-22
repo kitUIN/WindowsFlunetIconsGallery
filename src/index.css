@@ -38,16 +38,19 @@ html {
 body {
   width: 100vw;
   overflow: hidden;
+
 }
 .App {
   height: 100%;
 	width: 100%;
 }
 .card-box { 
-  
   height: 100%;
 	width: 100%;
   overflow: scroll;
+  overflow-x: hidden;
+  background: var(--colorNeutralBackground2Hover);
+  border-top-left-radius: 20px;
   padding: 0 10px;
 } 
 .card {
@@ -55,6 +58,8 @@ body {
 	width: 100%;
   display: flex;
   flex-wrap: wrap;
+  padding: 20px 0 ;
+  justify-content: space-evenly;
 } 
 .app-icon-pointer {
   margin-top: 4px;
@@ -106,7 +111,7 @@ body {
 }
 .Tabs {
   marign-top: 20px;
-  min-width: 120px;
+  min-width: 160px;
   padding: 0 5px;
   display: flex;
   flex-direction: column;
